@@ -1,13 +1,13 @@
-## BlackJack-Research
+ BlackJack-Research
 ==============================================
 
 Basic BlackJack implementation with ability to add various strategies.
 
-BlackJack implementation cloned from: git@github.com:seblau/BlackJack-Simulator.git with modifications (ie. no Omega, etc)
+BlackJack implementation cloned from: `git@github.com:seblau/BlackJack-Simulator.git` with modifications (ie. no Omega, etc)
 
 ### Running
 
-    `python BlackJack.py`
+    python BlackJack.py
 
 ### Gaming Rules
 
@@ -33,8 +33,6 @@ At top of BlackJack.py
 ### Strategy
 
 Any strategy can be fed into the simulator as a .csv file. The default strategy that comes with this simulator looks like the following:
-
-![Default Strategy](/documentation/strategy.png?raw=true)
 
 * The first column shows both player's cards added up
 * The first row shows the dealers up-card
