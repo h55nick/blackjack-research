@@ -5,9 +5,6 @@ import scipy.stats as stats
 import pylab as pl
 import matplotlib.pyplot as plt
 
-from Hand import Hand
-from Card import Card
-from Shoe import Shoe
 from Player import Player
 from Dealer import Dealer
 from Game import Game
@@ -16,7 +13,7 @@ from RLStrategy import RLStrategy
 from BasicStrategy import BasicStrategy
 from RandomStrategy import RandomStrategy
 
-GAMES = 100
+GAMES = 1
 
 if __name__ == "__main__":
     print sys.argv[1]

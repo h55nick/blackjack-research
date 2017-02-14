@@ -19,9 +19,9 @@ class BasicStrategy(object):
 
     def select_action(self, player, hand):
         if hand.soft():
-            flag = self.soft_strat[hand.value][player.dealer_hand.cards[0].name]
+            flag = self.soft_strat[hand.value][player.dealer_hand.first_card()]
         elif hand.splitable():
-            flag = self.pair_strat[hand.value][player.dealer_hand.cards[0].name]
+            flag = self.pair_strat[hand.value][player.dealer_hand.first_card()]
         else:
-            flag = self.hard_strat[hand.value][player.dealer_hand.cards[0].name]
+            flag = self.hard_strat[hand.value][player.dealer_hand.first_card()]
         return flag

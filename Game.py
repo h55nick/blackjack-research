@@ -5,7 +5,8 @@ from Hand import Hand
 from Card import Card
 from Shoe import Shoe
 
-SHOE_SIZE = 6
+SHOE_SIZE = 1
+
 class Game(object):
     """
     A sequence of Blackjack Rounds that keeps track of total money won or lost
@@ -13,7 +14,7 @@ class Game(object):
     def __init__(self, strategy=None):
         self.shoe = Shoe(SHOE_SIZE)
         self.money = 0.0
-        self.bet = 0.0
+        self.bet = 1.0
         self.stake = 1.0
         self.player = Player(strategy=strategy)
         self.dealer = Dealer()
@@ -83,8 +84,8 @@ class Game(object):
             self.money += win
             self.bet += bet
 
-            self.player.strategy.record_result(win=win,status=flag, bet=bet, hand=hand)
-            # print "Player Hand: %s %s (Value: %d, Busted: %r, BlackJack: %r, Splithand: %r, Soft: %r, Surrender: %r, Doubled: %r)" % (hand, status, hand.value, hand.busted(), hand.blackjack(), hand.splithand, hand.soft(), hand.surrender, hand.doubled)
+        self.player.strategy.record_result(hand, self.player, win)
+        # print "Player Hand: %s %s (Value: %d, Busted: %r, BlackJack: %r, Splithand: %r, Soft: %r, Surrender: %r, Doubled: %r)" % (hand, status, hand.value, hand.busted(), hand.blackjack(), hand.splithand, hand.soft(), hand.surrender, hand.doubled)
 
         # print "Dealer Hand: %s (%d)" % (self.dealer.hand, self.dealer.hand.value)
         print self.player.strategy.qlearner.print_q()

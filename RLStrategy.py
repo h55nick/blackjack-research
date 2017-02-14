@@ -13,18 +13,27 @@ class RLStrategy(object):
     def q(self):
         self.qlearner.q
 
-    def record_result(self, win=0, bet=1, status=None, hand=''):
-        state = sum(hand.card_values())
-        state2 = state - sum(hand.card_values()[0:-2])
+    def create_state(self, hand, player):
+        return "{}|{}".format(hand.card_values(), player.dealer_hand.first_card())
+
+    def record_result(self, hand, player, win=None):
+        state = self.create_state(hand, player)
+        state1 = self.last_state
         action = self.last_action
-        reward = win
-        self.qlearner.learn(state, action, reward, state2)
+        if win == None:
+            reward = self.qlearner.getQ(state, action)
+        else:
+            reward = win
+        print "state: {}, action {}, reward: {}, state1: {}".format(state, action, reward, state1)
+        self.qlearner.learn(state, action, reward, state1)
+        self.last_state = ""
         return ''
 
     def select_action(self, player, hand):
         # print self.qlearner.q
-        state = sum(hand.card_values())
+        state =  self.create_state(hand, player)
         self.last_action = self.qlearner.chooseAction(state)
+        self.last_state = state
         return self.last_action
 
 class QLearn:
