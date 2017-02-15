@@ -5,7 +5,7 @@ from Hand import Hand
 from Card import Card
 from Shoe import Shoe
 
-SHOE_SIZE = 1
+SHOE_SIZE = 10
 
 class Game(object):
     """

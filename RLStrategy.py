@@ -8,13 +8,13 @@ class RLStrategy(object):
     def __init__(self):
         actions = ['D', 'Sr', 'H', 'S'] # , 'P'
         self.qlearner = QLearn(actions)
-        self.last_action = None
+        self.last_action = ''
 
     def q(self):
         self.qlearner.q
 
     def create_state(self, hand, player):
-        return "{}|{}".format(hand.card_values(), player.dealer_hand.first_card())
+        return "{}|{}".format(sum(hand.card_values()), player.dealer_hand.first_card_value())
 
     def record_result(self, hand, player, win=None):
         state = self.create_state(hand, player)
@@ -41,7 +41,7 @@ class QLearn:
     Abstract Q Leaner
     """
 
-    def __init__(self, actions, epsilon=0.6, alpha=0.2, gamma=0.99):
+    def __init__(self, actions, epsilon=0.2, alpha=0.3, gamma=0.99):
         self.q = {}
         self.epsilon = epsilon
         self.alpha = alpha
@@ -61,7 +61,7 @@ class QLearn:
 
     def chooseAction(self, state):
         print state
-        if False and random.random() < self.epsilon:
+        if random.random() < self.epsilon:
             action = random.choice(self.actions)
         else:
             q = [ self.getQ(state, a) for a in self.actions ]
@@ -82,5 +82,5 @@ class QLearn:
 
     def print_q(self):
         for k in sorted(self.q, key=lambda k: k):
-            print "k: {}  | {}".format(k, self.q[k])
+            print "q: {} {} => {}".format(k[0], k[1], self.q[k])
 

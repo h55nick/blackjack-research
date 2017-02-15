@@ -13,7 +13,7 @@ from RLStrategy import RLStrategy
 from BasicStrategy import BasicStrategy
 from RandomStrategy import RandomStrategy
 
-GAMES = 1
+GAMES = 100
 
 if __name__ == "__main__":
     print sys.argv[1]
@@ -45,7 +45,7 @@ if __name__ == "__main__":
         bets.append(game.get_bet())
         countings += game.shoe.count_history
 
-        # print("WIN for Game no. %d: %s (%s bet)" % (g + 1, "{0:.2f}".format(game.get_money()), "{0:.2f}".format(game.get_bet())))
+        print("WIN for Game no. %d: %s (%s bet)" % (g + 1, "{0:.2f}".format(game.get_money()), "{0:.2f}".format(game.get_bet())))
 
     sume = 0.0
     total_bet = 0.0
@@ -54,6 +54,7 @@ if __name__ == "__main__":
     for value in bets:
         total_bet += value
 
+    print strategy.qlearner.print_q()
     print "\n%d hands overall, %0.2f hands per game on average" % (nb_hands, float(nb_hands) / GAMES)
     print "%0.2f total bet" % total_bet
     print("Overall winnings: {} (edge = {} %)".format("{0:.2f}".format(sume), "{0:.3f}".format(100.0*sume/total_bet)))

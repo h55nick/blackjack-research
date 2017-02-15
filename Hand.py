@@ -25,6 +25,9 @@ class Hand(object):
     def first_card(self):
         return self.cards[0].name
 
+    def first_card_value(self):
+        return self.cards[0].value
+
     def card_values(self):
         return [c.value for c in self.cards]
 
